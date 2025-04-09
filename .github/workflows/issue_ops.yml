@@ -69,6 +69,9 @@ jobs:
           COMMENT_BODY: ${{ github.event.comment.body }}
           LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
         run: |
+          echo "$ISSUE_BODY"
+          echo "$COMMENT_BODY"
+          echo "$LABELS"
           ./bin/parse_issue "$ISSUE_BODY" "$COMMENT_BODY" "$LABELS"
       - name: Validate arguments
         run: |
