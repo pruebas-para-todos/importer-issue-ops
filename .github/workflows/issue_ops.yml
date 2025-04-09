@@ -69,12 +69,13 @@ jobs:
           COMMENT_BODY: ${{ github.event.comment.body }}
           LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
         run: |
-          echo "$ISSUE_BODY"
-          echo "$COMMENT_BODY"
-          echo "$LABELS"
+          echo "Issue: $ISSUE_BODY"
+          echo "Comment: $COMMENT_BODY"
+          echo "Labels: $LABELS"
           ./bin/parse_issue "$ISSUE_BODY" "$COMMENT_BODY" "$LABELS"
       - name: Validate arguments
         run: |
+          echo "${{ steps.prepare.outputs.provider }}"
           if [ -z "${{ steps.prepare.outputs.provider }}" ]; then
             echo "Unable to determine provider"
             exit 1
